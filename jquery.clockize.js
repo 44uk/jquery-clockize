@@ -20,16 +20,21 @@ $.fn.extend({
       delimiter: ':',
       blink:     true,
       seconds:   true,
-      attach_class: false
+      attach_class: true,
+      monospace: true
     }, options)
 
-    var d = new Date()
-    $this = $(this)
-      $d1 = $('<span/>')
-      $d2 = $('<span/>')
-       $h = $('<span/>')
-       $m = $('<span/>')
-       $s = $('<span/>')
+    var d = new Date(),
+        $this = $(this),
+          $d1 = $('<span/>'),
+          $d2 = $('<span/>'),
+           $h = $('<span/>'),
+           $m = $('<span/>'),
+           $s = $('<span/>')
+       
+    if(options.monospace == true){
+      $this.css('font-family', 'monospace')
+    }
 
     if(options.attach_class == true){
       $d1.addClass('clockize_delimiter1')
@@ -47,12 +52,13 @@ $.fn.extend({
            .append($s)
     }
 
-    var d = new Date()
-        h = d.getHours()
-        m = d.getMinutes()
-        s = d.getSeconds()
+    var d = new Date(),
+        h = d.getHours(),
+        m = d.getMinutes(),
+        s = d.getSeconds(),
         cache_sec = s
-    tick = function(){
+
+    var tick = function(){
       s = cache_sec
       if(cache_sec == 60){
         d = new Date()
